@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muzigal Pragathi Nagar — Feedback</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2A52;
+    --orange:#F5821F;
+    --pink:#E91E8C;
+    --cream:#FFF8F0;
+    --slate:#6B7280;
+    --line:#E8E1D6;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    font-family:'Inter',sans-serif;
+    color:var(--navy);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:28px 18px 60px;
+  }
+  .header{
+    text-align:center;
+    margin-bottom:6px;
+  }
+  .logo-img{
+    max-width:280px;
+    width:100%;
+    height:auto;
+    display:block;
+    margin:0 auto;
+  }
+  .logo{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:30px;
+    letter-spacing:0.5px;
+    line-height:1;
+  }
+  .logo .m{color:var(--navy);}
+  .logo .u-icon{
+    display:inline-block;
+    background:linear-gradient(135deg, var(--orange), var(--pink));
+    color:#fff;
+    border-radius:7px;
+    padding:0 6px;
+    margin:0 1px;
+  }
+  .sub{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    color:var(--orange);
+    letter-spacing:2px;
+    font-size:13px;
+    margin-top:4px;
+  }
+  .staff{
+    position:relative;
+    height:46px;
+    margin:18px 0 22px;
+  }
+  .staff .rule{
+    position:absolute;
+    left:0; right:0;
+    height:1px;
+    background:var(--line);
+  }
+  .staff .rule:nth-child(1){top:6px;}
+  .staff .rule:nth-child(2){top:16px;}
+  .staff .rule:nth-child(3){top:26px;}
+  .staff .rule:nth-child(4){top:36px;}
+  .staff .rule:nth-child(5){top:46px;}
+  .instrument-note{
+    position:relative;
+    z-index:2;
+    display:flex;
+    justify-content:center;
+  }
+  .instrument-pill{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    background:var(--navy);
+    color:#fff;
+    padding:9px 22px;
+    border-radius:30px;
+    box-shadow:0 4px 14px rgba(27,42,82,0.25);
+  }
+  .tagline{
+    text-align:center;
+    color:var(--slate);
+    font-size:13.5px;
+    margin:0 0 26px;
+    font-style:italic;
+  }
+  .card{
+    background:var(--card);
+    border-radius:18px;
+    padding:24px 20px;
+    box-shadow:0 2px 18px rgba(27,42,82,0.07);
+    border:1px solid var(--line);
+  }
+  .anon-note{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    background:#FBF3E9;
+    border:1px solid #F0DEC2;
+    border-radius:12px;
+    padding:12px 14px;
+    font-size:12.5px;
+    color:var(--navy);
+    margin-bottom:24px;
+    line-height:1.5;
+  }
+  .anon-note svg{flex-shrink:0; margin-top:1px;}
+  .q-block{
+    margin-bottom:28px;
+  }
+  .q-label{
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:15.5px;
+    margin-bottom:14px;
+    line-height:1.4;
+  }
+  .q-number{
+    color:var(--pink);
+    margin-right:6px;
+  }
+  .scale-row{
+    display:flex;
+    gap:8px;
+  }
+  .scale-btn{
+    flex:1;
+    padding:12px 4px;
+    border-radius:12px;
+    border:1.5px solid var(--line);
+    background:#fff;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:18px;
+    color:var(--slate);
+    cursor:pointer;
+    transition:all 0.15s ease;
+    text-align:center;
+  }
+  .scale-btn .face-label{
+    display:block;
+    font-size:10px;
+    font-weight:500;
+    margin-top:3px;
+    color:var(--slate);
+  }
+  .scale-btn:hover{border-color:var(--orange);}
+  .scale-btn.selected{
+    background:linear-gradient(135deg, var(--orange), var(--pink));
+    border-color:transparent;
+    color:#fff;
+  }
+  .scale-btn.selected .face-label{color:#fff;}
+  .choice-row{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .choice-btn{
+    padding:13px 16px;
+    border-radius:12px;
+    border:1.5px solid var(--line);
+    background:#fff;
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+    font-size:14.5px;
+    color:var(--navy);
+    cursor:pointer;
+    text-align:left;
+    transition:all 0.15s ease;
+  }
+  .choice-btn:hover{border-color:var(--orange);}
+  .choice-btn.selected{
+    background:rgba(245,130,31,0.08);
+    border-color:var(--orange);
+    font-weight:600;
+  }
+  textarea{
+    width:100%;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:13px 14px;
+    font-family:'Inter',sans-serif;
+    font-size:14.5px;
+    color:var(--navy);
+    resize:vertical;
+    min-height:90px;
+    background:#fff;
+  }
+  textarea:focus, .scale-btn:focus-visible, .choice-btn:focus-visible, .submit-btn:focus-visible{
+    outline:2px solid var(--pink);
+    outline-offset:2px;
+  }
+  textarea::placeholder{color:#B7BAC2;}
+  .optional-tag{
+    font-weight:400;
+    color:var(--slate);
+    font-size:12.5px;
+  }
+  .submit-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg, var(--orange), var(--pink));
+    color:#fff;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:15.5px;
+    cursor:pointer;
+    margin-top:6px;
+    transition:transform 0.1s ease, opacity 0.15s ease;
+  }
+  .submit-btn:hover{opacity:0.92;}
+  .submit-btn:active{transform:scale(0.99);}
+  .submit-btn:disabled{
+    opacity:0.5;
+    cursor:not-allowed;
+  }
+  .error-msg{
+    color:var(--pink);
+    font-size:12.5px;
+    margin-top:-18px;
+    margin-bottom:18px;
+    display:none;
+  }
+  .footer-note{
+    text-align:center;
+    font-size:11.5px;
+    color:var(--slate);
+    margin-top:22px;
+    line-height:1.6;
+  }
+
+  /* success state */
+  .success-screen{
+    display:none;
+    text-align:center;
+    padding:50px 20px;
+  }
+  .success-screen .check{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--orange), var(--pink));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 20px;
+  }
+  .success-screen h2{
+    font-family:'Poppins',sans-serif;
+    font-size:20px;
+    margin-bottom:8px;
+  }
+  .success-screen p{
+    color:var(--slate);
+    font-size:14px;
+    line-height:1.6;
+    max-width:340px;
+    margin:0 auto;
+  }
+
+  @media (max-width: 380px){
+    .scale-btn{font-size:15px; padding:10px 2px;}
+    .logo-img{max-width:230px;}
+  }
+
+  /* ===== ADMIN VIEW STYLES ===== */
+  .admin-wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:28px 18px 60px;
+  }
+  .admin-gate{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:70vh;
+  }
+  .admin-gate-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:36px 28px;
+    text-align:center;
+    max-width:340px;
+    width:100%;
+    box-shadow:0 2px 18px rgba(27,42,82,0.07);
+  }
+  .admin-gate-card h2{
+    font-family:'Poppins',sans-serif;
+    margin:0 0 6px;
+    font-size:19px;
+  }
+  .admin-gate-card p{
+    color:var(--slate);
+    font-size:13.5px;
+    margin:0 0 18px;
+  }
+  #pinInput{
+    width:100%;
+    padding:13px 14px;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    font-size:16px;
+    text-align:center;
+    letter-spacing:3px;
+    font-family:'Inter',sans-serif;
+  }
+  #pinInput:focus{outline:2px solid var(--pink); outline-offset:2px;}
+
+  .dash-header{
+    text-align:center;
+    margin-bottom:22px;
+    position:relative;
+  }
+  .dash-header h1{
+    font-family:'Poppins',sans-serif;
+    font-size:21px;
+    margin:8px 0 0;
+    color:var(--navy);
+  }
+  .refresh-btn{
+    position:absolute;
+    right:0;
+    top:0;
+    background:#fff;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:8px 14px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--navy);
+    cursor:pointer;
+    font-family:'Inter',sans-serif;
+  }
+  .refresh-btn:hover{border-color:var(--orange);}
+
+  .instrument-tabs{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:8px;
+    margin-bottom:20px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .tab-btn{
+    flex-shrink:0;
+    padding:9px 16px;
+    border-radius:30px;
+    border:1.5px solid var(--line);
+    background:#fff;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13.5px;
+    color:var(--slate);
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .tab-btn.active{
+    background:var(--navy);
+    border-color:var(--navy);
+    color:#fff;
+  }
+
+  .summary-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+    margin-bottom:24px;
+  }
+  .summary-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px;
+    text-align:center;
+  }
+  .summary-card .num{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:24px;
+    color:var(--navy);
+  }
+  .summary-card .lbl{
+    font-size:11.5px;
+    color:var(--slate);
+    margin-top:2px;
+    line-height:1.4;
+  }
+  .summary-card .num.warn{color:var(--pink);}
+
+  .loading-msg, .empty-msg{
+    text-align:center;
+    color:var(--slate);
+    font-size:14px;
+    padding:30px 0;
+  }
+
+  .responses-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .response-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 18px;
+  }
+  .response-card .resp-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+  }
+  .response-card .resp-instrument{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    color:var(--navy);
+  }
+  .response-card .resp-date{
+    font-size:11.5px;
+    color:var(--slate);
+  }
+  .resp-scores{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:10px;
+  }
+  .resp-score-tag{
+    font-size:11.5px;
+    background:#F4F1EA;
+    border-radius:8px;
+    padding:4px 9px;
+    color:var(--navy);
+    font-weight:500;
+  }
+  .resp-score-tag b{color:var(--orange);}
+  .resp-comment{
+    font-size:13.5px;
+    color:var(--navy);
+    line-height:1.5;
+    background:#FBF3E9;
+    border-radius:10px;
+    padding:10px 12px;
+    font-style:italic;
+  }
+  .resp-comment.empty{
+    color:var(--slate);
+    font-style:italic;
+    background:transparent;
+    padding:0;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap" id="studentView">
+
+  <div class="header">
+    <img src="logo.png" alt="Muzigal Pragathi Nagar" class="logo-img">
+  </div>
+
+  <div class="staff">
+    <div class="rule"></div>
+    <div class="rule"></div>
+    <div class="rule"></div>
+    <div class="rule"></div>
+    <div class="rule"></div>
+    <div class="instrument-note">
+      <span class="instrument-pill" id="instrumentLabel">Loading...</span>
+    </div>
+  </div>
+
+  <p class="tagline">Some Songs. Many Dreams. One Stage.</p>
+
+  <div class="card" id="formCard">
+
+    <div class="anon-note">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B2A52" stroke-width="2"><path d="M12 1l9 4v6c0 5-3.8 9.4-9 11-5.2-1.6-9-6-9-11V5l9-4z"/></svg>
+      <span>This survey is anonymous. Your honest responses help us make the learning experience and the institute even better.</span>
+    </div>
+
+    <form id="feedbackForm">
+
+      <div class="q-block">
+        <div class="q-label"><span class="q-number">1.</span>Overall, how would you rate the learning experience with this faculty?</div>
+        <div class="scale-row" data-question="q1">
+          <button type="button" class="scale-btn" data-value="1">😕<span class="face-label">Could be better</span></button>
+          <button type="button" class="scale-btn" data-value="2">🙂<span class="face-label">Okay</span></button>
+          <button type="button" class="scale-btn" data-value="3">😊<span class="face-label">Good</span></button>
+          <button type="button" class="scale-btn" data-value="4">😄<span class="face-label">Great</span></button>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label"><span class="q-number">2.</span>How clear and easy to follow is the teaching style?</div>
+        <div class="scale-row" data-question="q2">
+          <button type="button" class="scale-btn" data-value="1">😕<span class="face-label">Could be better</span></button>
+          <button type="button" class="scale-btn" data-value="2">🙂<span class="face-label">Okay</span></button>
+          <button type="button" class="scale-btn" data-value="3">😊<span class="face-label">Good</span></button>
+          <button type="button" class="scale-btn" data-value="4">😄<span class="face-label">Great</span></button>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label"><span class="q-number">3.</span>How is the overall environment and experience at the academy?</div>
+        <div class="scale-row" data-question="q4">
+          <button type="button" class="scale-btn" data-value="1">😕<span class="face-label">Could be better</span></button>
+          <button type="button" class="scale-btn" data-value="2">🙂<span class="face-label">Okay</span></button>
+          <button type="button" class="scale-btn" data-value="3">😊<span class="face-label">Good</span></button>
+          <button type="button" class="scale-btn" data-value="4">😄<span class="face-label">Great</span></button>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label"><span class="q-number">4.</span>Does your child look forward to class?</div>
+        <div class="choice-row" data-question="q3">
+          <button type="button" class="choice-btn" data-value="Yes, always">Yes, always</button>
+          <button type="button" class="choice-btn" data-value="Mostly">Mostly</button>
+          <button type="button" class="choice-btn" data-value="Not really">Not really</button>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">Anything that could make the experience even better? <span class="optional-tag">(optional)</span></div>
+        <textarea id="comments" placeholder="Share any thoughts or suggestions..."></textarea>
+      </div>
+
+      <p class="error-msg" id="errorMsg">Please answer all four questions above before submitting.</p>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Submit feedback</button>
+
+    </form>
+
+  </div>
+
+  <div class="success-screen" id="successScreen">
+    <div class="check">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h2>Thank you!</h2>
+    <p>Your feedback has been submitted anonymously. We really appreciate you taking the time to help us improve.</p>
+  </div>
+
+  <p class="footer-note" id="footerNote"></p>
+
+</div>
+
+<!-- ============== ADMIN VIEW ============== -->
+<div class="admin-wrap" id="adminView" style="display:none;">
+
+  <!-- PIN gate -->
+  <div class="admin-gate" id="adminGate">
+    <div class="admin-gate-card">
+      <img src="logo.png" alt="Muzigal" class="logo-img" style="max-width:200px; margin-bottom:18px;">
+      <h2>Staff dashboard</h2>
+      <p>Enter the PIN to view feedback responses.</p>
+      <input type="password" id="pinInput" placeholder="Enter PIN" inputmode="numeric" autocomplete="off">
+      <button id="pinSubmit" class="submit-btn" style="margin-top:14px;">Unlock</button>
+      <p class="error-msg" id="pinError" style="margin-top:12px; display:none;">Incorrect PIN. Please try again.</p>
+    </div>
+  </div>
+
+  <!-- Dashboard (shown after PIN unlock) -->
+  <div class="dashboard" id="dashboard" style="display:none;">
+
+    <div class="dash-header">
+      <img src="logo.png" alt="Muzigal" class="logo-img" style="max-width:180px;">
+      <h1>Feedback Dashboard</h1>
+      <button id="refreshBtn" class="refresh-btn">↻ Refresh</button>
+    </div>
+
+    <div class="instrument-tabs" id="instrumentTabs">
+      <button class="tab-btn active" data-tab="all">All</button>
+      <button class="tab-btn" data-tab="piano">🎹 Piano</button>
+      <button class="tab-btn" data-tab="guitar">🎸 Guitar</button>
+      <button class="tab-btn" data-tab="drums">🥁 Drums</button>
+      <button class="tab-btn" data-tab="carnatic">🎤 Carnatic</button>
+      <button class="tab-btn" data-tab="violin">🎻 Violin</button>
+    </div>
+
+    <div id="summarySection" class="summary-grid"></div>
+
+    <div id="loadingMsg" class="loading-msg">Loading responses…</div>
+    <div id="responsesList" class="responses-list"></div>
+    <div id="emptyMsg" class="empty-msg" style="display:none;">No responses yet for this filter.</div>
+
+  </div>
+
+</div>
+<!-- ============== END ADMIN VIEW ============== -->
+
+<script>
+  // ===== VIEW ROUTING =====
+  const ADMIN_PIN = "2580"; // change this to your preferred PIN
+  const urlParams = new URLSearchParams(window.location.search);
+  const isAdminView = urlParams.get('view') === 'admin';
+
+  if (isAdminView) {
+    document.getElementById('studentView').style.display = 'none';
+    document.getElementById('adminView').style.display = 'block';
+    initAdminView();
+  } else {
+    initStudentView();
+  }
+
+  function initStudentView(){
+  // Instrument detection via URL param, e.g. ?instrument=guitar
+  const INSTRUMENTS = {
+    piano:    { label: "🎹 Piano Faculty",    key: "piano" },
+    keyboard: { label: "🎹 Piano Faculty",    key: "piano" },
+    guitar:   { label: "🎸 Guitar Faculty",   key: "guitar" },
+    drums:    { label: "🥁 Drums Faculty",    key: "drums" },
+    carnatic: { label: "🎤 Carnatic Music Faculty", key: "carnatic" },
+    violin:   { label: "🎻 Violin Faculty",   key: "violin" }
+  };
+
+  function getInstrument(){
+    const params = new URLSearchParams(window.location.search);
+    const raw = (params.get('instrument') || '').toLowerCase().trim();
+    return INSTRUMENTS[raw] || { label: "🎵 Faculty Feedback", key: "general" };
+  }
+
+  const instrument = getInstrument();
+  document.getElementById('instrumentLabel').textContent = instrument.label;
+  document.getElementById('footerNote').textContent =
+    "Muzigal Pragathi Nagar · " + instrument.label.replace(/^[^\s]+\s/, '') + " Feedback";
+
+  // Selection state
+  const state = { q1: null, q2: null, q3: null, q4: null };
+
+  document.querySelectorAll('.scale-row').forEach(row => {
+    const qKey = row.dataset.question;
+    row.querySelectorAll('.scale-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        row.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        state[qKey] = btn.dataset.value;
+        document.getElementById('errorMsg').style.display = 'none';
+      });
+    });
+  });
+
+  document.querySelectorAll('.choice-row').forEach(row => {
+    const qKey = row.dataset.question;
+    row.querySelectorAll('.choice-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        row.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        state[qKey] = btn.dataset.value;
+        document.getElementById('errorMsg').style.display = 'none';
+      });
+    });
+  });
+
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwvdogjo';
+
+  document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!state.q1 || !state.q2 || !state.q3 || !state.q4) {
+      document.getElementById('errorMsg').style.display = 'block';
+      return;
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    const scoreLabels = {1:"Could be better", 2:"Okay", 3:"Good", 4:"Great"};
+
+    const entry = {
+      instrument: instrument.key,
+      faculty_experience: scoreLabels[state.q1] || state.q1,
+      teaching_clarity: scoreLabels[state.q2] || state.q2,
+      looks_forward_to_class: state.q3,
+      academy_environment: scoreLabels[state.q4] || state.q4,
+      comments: document.getElementById('comments').value.trim() || '(no comments)',
+      submitted_at: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
+      _subject: 'Muzigal Feedback — ' + instrument.label
+    };
+
+    try {
+      await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(entry)
+      });
+    } catch (err) {
+      console.error('Submission error:', err);
+      // Still show success to the user even if the network call has an issue —
+      // avoids leaving a parent stuck on a form with no clear next step.
+    }
+
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('successScreen').style.display = 'block';
+  });
+  } // end initStudentView
+
+  // ===== ADMIN DASHBOARD =====
+  function initAdminView(){
+    const INSTRUMENT_LABELS = {
+      piano: "🎹 Piano", guitar: "🎸 Guitar", drums: "🥁 Drums",
+      carnatic: "🎤 Carnatic", violin: "🎻 Violin", general: "🎵 General"
+    };
+
+    let allResponses = [];
+    let activeTab = 'all';
+
+    // --- PIN gate ---
+    document.getElementById('pinSubmit').addEventListener('click', checkPin);
+    document.getElementById('pinInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') checkPin();
+    });
+
+    function checkPin(){
+      const val = document.getElementById('pinInput').value.trim();
+      if (val === ADMIN_PIN) {
+        document.getElementById('adminGate').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        loadResponses();
+      } else {
+        document.getElementById('pinError').style.display = 'block';
+      }
+    }
+
+    // --- Tabs ---
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeTab = btn.dataset.tab;
+        renderDashboard();
+      });
+    });
+
+    document.getElementById('refreshBtn').addEventListener('click', loadResponses);
+
+    // --- Load all responses from storage ---
+    async function loadResponses(){
+      document.getElementById('loadingMsg').style.display = 'block';
+      document.getElementById('responsesList').innerHTML = '';
+      document.getElementById('emptyMsg').style.display = 'none';
+
+      try {
+        const listResult = await window.storage.list('fb_', true);
+        const keys = (listResult && listResult.keys) ? listResult.keys : [];
+
+        const entries = [];
+        for (const k of keys) {
+          try {
+            const res = await window.storage.get(k, true);
+            if (res && res.value) {
+              const parsed = JSON.parse(res.value);
+              entries.push(parsed);
+            }
+          } catch (innerErr) {
+            console.error('Failed to load key', k, innerErr);
+          }
+        }
+
+        entries.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+        allResponses = entries;
+      } catch (err) {
+        console.error('Failed to list responses:', err);
+        allResponses = [];
+      }
+
+      document.getElementById('loadingMsg').style.display = 'none';
+      renderDashboard();
+    }
+
+    function scoreLabel(v){
+      return ({1:"Could be better", 2:"Okay", 3:"Good", 4:"Great"})[v] || v;
+    }
+
+    function renderDashboard(){
+      const filtered = activeTab === 'all'
+        ? allResponses
+        : allResponses.filter(r => r.instrument === activeTab);
+
+      // --- Summary cards ---
+      const summaryEl = document.getElementById('summarySection');
+      if (filtered.length === 0) {
+        summaryEl.innerHTML = '';
+      } else {
+        const avg = (key) => {
+          const nums = filtered.map(r => parseFloat(r[key])).filter(n => !isNaN(n));
+          if (!nums.length) return '—';
+          return (nums.reduce((a,b) => a+b, 0) / nums.length).toFixed(1);
+        };
+        const lookForwardYes = filtered.filter(r => r.q3_looks_forward === 'Yes, always').length;
+
+        summaryEl.innerHTML = `
+          <div class="summary-card">
+            <div class="num">${filtered.length}</div>
+            <div class="lbl">Total responses</div>
+          </div>
+          <div class="summary-card">
+            <div class="num">${avg('q1_faculty_experience')}<span style="font-size:13px;color:var(--slate);">/4</span></div>
+            <div class="lbl">Avg. faculty experience</div>
+          </div>
+          <div class="summary-card">
+            <div class="num">${avg('q2_teaching_clarity')}<span style="font-size:13px;color:var(--slate);">/4</span></div>
+            <div class="lbl">Avg. teaching clarity</div>
+          </div>
+          <div class="summary-card">
+            <div class="num">${avg('q4_academy_environment')}<span style="font-size:13px;color:var(--slate);">/4</span></div>
+            <div class="lbl">Avg. academy environment</div>
+          </div>
+        `;
+      }
+
+      // --- Response list ---
+      const listEl = document.getElementById('responsesList');
+      const emptyEl = document.getElementById('emptyMsg');
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = '';
+        emptyEl.style.display = 'block';
+        return;
+      }
+      emptyEl.style.display = 'none';
+
+      listEl.innerHTML = filtered.map(r => {
+        const dateStr = r.submittedAt
+          ? new Date(r.submittedAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })
+          : '—';
+        const instLabel = INSTRUMENT_LABELS[r.instrument] || r.instrument || 'Unknown';
+        const comment = (r.comments || '').trim();
+
+        return `
+          <div class="response-card">
+            <div class="resp-top">
+              <span class="resp-instrument">${instLabel}</span>
+              <span class="resp-date">${dateStr}</span>
+            </div>
+            <div class="resp-scores">
+              <span class="resp-score-tag">Experience: <b>${scoreLabel(r.q1_faculty_experience)}</b></span>
+              <span class="resp-score-tag">Teaching clarity: <b>${scoreLabel(r.q2_teaching_clarity)}</b></span>
+              <span class="resp-score-tag">Academy environment: <b>${scoreLabel(r.q4_academy_environment)}</b></span>
+              <span class="resp-score-tag">Looks forward: <b>${r.q3_looks_forward || '—'}</b></span>
+            </div>
+            ${comment
+              ? `<div class="resp-comment">"${comment.replace(/</g, '&lt;')}"</div>`
+              : `<div class="resp-comment empty">No additional comments</div>`
+            }
+          </div>
+        `;
+      }).join('');
+    }
+  } // end initAdminView
+</script>
+
+</body>
+</html>
