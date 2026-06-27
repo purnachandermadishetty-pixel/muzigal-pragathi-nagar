@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5821F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E91E8C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="140" cy="140" r="135" fill="#FFF8F0" stroke="#E8E1D6" stroke-width="2"/>
+  
+  <!-- Music note symbols -->
+  <g transform="translate(140, 70)">
+    <!-- Left note -->
+    <ellipse cx="-20" cy="35" rx="8" ry="10" fill="#1B2A52"/>
+    <line x1="-20" y1="25" x2="-20" y2="0" stroke="#1B2A52" stroke-width="2"/>
+    <!-- Right note -->
+    <ellipse cx="20" cy="45" rx="8" ry="10" fill="#E91E8C"/>
+    <line x1="20" y1="35" x2="20" y2="5" stroke="#E91E8C" stroke-width="2"/>
+    <!-- Connecting beam -->
+    <line x1="-18" y1="5" x2="22" y2="10" stroke="#F5821F" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Text: Muzigal Academy -->
+  <text x="140" y="190" font-family="Poppins, sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="#1B2A52">
+    Muzigal
+  </text>
+  <text x="140" y="215" font-family="Poppins, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#F5821F" letter-spacing="2">
+    ACADEMY
+  </text>
+  
+  <!-- Decorative dots -->
+  <circle cx="60" cy="140" r="3" fill="#F5821F" opacity="0.3"/>
+  <circle cx="220" cy="140" r="3" fill="#E91E8C" opacity="0.3"/>
+</svg>
