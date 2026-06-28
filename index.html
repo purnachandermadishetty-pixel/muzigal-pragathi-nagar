@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Muzigal Pragathi Nagar — Feedback</title>
-<div class="logo-container">
-    <img src="logo.png" alt="Muzigal Pragathi Nagar Logo" class="logo">
-</div>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -253,8 +250,6 @@
     margin-top:22px;
     line-height:1.6;
   }
-
-  /* success state */
   .success-screen{
     display:none;
     text-align:center;
@@ -282,13 +277,10 @@
     max-width:340px;
     margin:0 auto;
   }
-
   @media (max-width: 380px){
     .scale-btn{font-size:15px; padding:10px 2px;}
     .logo-img{max-width:230px;}
   }
-
-  /* ===== ADMIN VIEW STYLES ===== */
   .admin-wrap{
     max-width:760px;
     margin:0 auto;
@@ -331,7 +323,6 @@
     font-family:'Inter',sans-serif;
   }
   #pinInput:focus{outline:2px solid var(--pink); outline-offset:2px;}
-
   .dash-header{
     text-align:center;
     margin-bottom:22px;
@@ -358,7 +349,6 @@
     font-family:'Inter',sans-serif;
   }
   .refresh-btn:hover{border-color:var(--orange);}
-
   .instrument-tabs{
     display:flex;
     gap:8px;
@@ -385,7 +375,6 @@
     border-color:var(--navy);
     color:#fff;
   }
-
   .summary-grid{
     display:grid;
     grid-template-columns:repeat(2, 1fr);
@@ -412,14 +401,12 @@
     line-height:1.4;
   }
   .summary-card .num.warn{color:var(--pink);}
-
   .loading-msg, .empty-msg{
     text-align:center;
     color:var(--slate);
     font-size:14px;
     padding:30px 0;
   }
-
   .responses-list{
     display:flex;
     flex-direction:column;
@@ -477,11 +464,6 @@
     background:transparent;
     padding:0;
   }
-  .logo {
-  width: 220px;
-  display: block;
-  margin: auto;
-}
 </style>
 </head>
 <body>
@@ -489,7 +471,7 @@
 <div class="wrap" id="studentView">
 
   <div class="header">
-    <img src="logo.png" alt="Muzigal Pragathi Nagar" class="logo-img">
+    <img src="logo.svg" alt="Muzigal Pragathi Nagar" class="logo-img">
   </div>
 
   <div class="staff">
@@ -578,13 +560,11 @@
 
 </div>
 
-<!-- ============== ADMIN VIEW ============== -->
 <div class="admin-wrap" id="adminView" style="display:none;">
 
-  <!-- PIN gate -->
   <div class="admin-gate" id="adminGate">
     <div class="admin-gate-card">
-      <img src="logo.png" alt="Muzigal" class="logo-img" style="max-width:200px; margin-bottom:18px;">
+      <img src="logo.svg" alt="Muzigal" class="logo-img" style="max-width:200px; margin-bottom:18px;">
       <h2>Staff dashboard</h2>
       <p>Enter the PIN to view feedback responses.</p>
       <input type="password" id="pinInput" placeholder="Enter PIN" inputmode="numeric" autocomplete="off">
@@ -593,11 +573,10 @@
     </div>
   </div>
 
-  <!-- Dashboard (shown after PIN unlock) -->
   <div class="dashboard" id="dashboard" style="display:none;">
 
     <div class="dash-header">
-      <img src="logo.png" alt="Muzigal" class="logo-img" style="max-width:180px;">
+      <img src="logo.svg" alt="Muzigal" class="logo-img" style="max-width:180px;">
       <h1>Feedback Dashboard</h1>
       <button id="refreshBtn" class="refresh-btn">↻ Refresh</button>
     </div>
@@ -620,11 +599,9 @@
   </div>
 
 </div>
-<!-- ============== END ADMIN VIEW ============== -->
 
 <script>
-  // ===== VIEW ROUTING =====
-  const ADMIN_PIN = "2580"; // change this to your preferred PIN
+  const ADMIN_PIN = "2580";
   const urlParams = new URLSearchParams(window.location.search);
   const isAdminView = urlParams.get('view') === 'admin';
 
@@ -637,7 +614,6 @@
   }
 
   function initStudentView(){
-  // Instrument detection via URL param, e.g. ?instrument=guitar
   const INSTRUMENTS = {
     piano:    { label: "🎹 Piano Faculty",    key: "piano" },
     keyboard: { label: "🎹 Piano Faculty",    key: "piano" },
@@ -655,10 +631,8 @@
 
   const instrument = getInstrument();
   document.getElementById('instrumentLabel').textContent = instrument.label;
-  document.getElementById('footerNote').textContent =
-    "Muzigal Pragathi Nagar · " + instrument.label.replace(/^[^\s]+\s/, '') + " Feedback";
+  document.getElementById('footerNote').textContent = "Muzigal Pragathi Nagar · " + instrument.label.replace(/^[^\s]+\s/, '') + " Feedback";
 
-  // Selection state
   const state = { q1: null, q2: null, q3: null, q4: null };
 
   document.querySelectorAll('.scale-row').forEach(row => {
@@ -723,16 +697,13 @@
       });
     } catch (err) {
       console.error('Submission error:', err);
-      // Still show success to the user even if the network call has an issue —
-      // avoids leaving a parent stuck on a form with no clear next step.
     }
 
     document.getElementById('formCard').style.display = 'none';
     document.getElementById('successScreen').style.display = 'block';
   });
-  } // end initStudentView
+  }
 
-  // ===== ADMIN DASHBOARD =====
   function initAdminView(){
     const INSTRUMENT_LABELS = {
       piano: "🎹 Piano", guitar: "🎸 Guitar", drums: "🥁 Drums",
@@ -742,7 +713,6 @@
     let allResponses = [];
     let activeTab = 'all';
 
-    // --- PIN gate ---
     document.getElementById('pinSubmit').addEventListener('click', checkPin);
     document.getElementById('pinInput').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') checkPin();
@@ -759,7 +729,6 @@
       }
     }
 
-    // --- Tabs ---
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -771,7 +740,6 @@
 
     document.getElementById('refreshBtn').addEventListener('click', loadResponses);
 
-    // --- Load all responses from storage ---
     async function loadResponses(){
       document.getElementById('loadingMsg').style.display = 'block';
       document.getElementById('responsesList').innerHTML = '';
@@ -814,7 +782,6 @@
         ? allResponses
         : allResponses.filter(r => r.instrument === activeTab);
 
-      // --- Summary cards ---
       const summaryEl = document.getElementById('summarySection');
       if (filtered.length === 0) {
         summaryEl.innerHTML = '';
@@ -824,7 +791,6 @@
           if (!nums.length) return '—';
           return (nums.reduce((a,b) => a+b, 0) / nums.length).toFixed(1);
         };
-        const lookForwardYes = filtered.filter(r => r.q3_looks_forward === 'Yes, always').length;
 
         summaryEl.innerHTML = `
           <div class="summary-card">
@@ -846,7 +812,6 @@
         `;
       }
 
-      // --- Response list ---
       const listEl = document.getElementById('responsesList');
       const emptyEl = document.getElementById('emptyMsg');
 
@@ -884,7 +849,7 @@
         `;
       }).join('');
     }
-  } // end initAdminView
+  }
 </script>
 
 </body>
